@@ -1,6 +1,10 @@
 # Configuration
-## 1. Run php artisan migrate
-## 2. Setup .env Variables
+## 1. Run Migrations(php artisan migrate)
+## 2. Publish Config
+```
+php artisan vendor:publish --provider="Omnitask\LaravelQueChecker\Providers\LaravelQueCheckerServiceProvider"
+```
+## 3. Setup .ENV Variables
 
 ```
 SLACK_QUE_NOTIFICATION=https://hooks.slack.com/services/A3xxxxHL/C01BxxxxGNS/EfLwgqxxxxxxsRV2JTQ
