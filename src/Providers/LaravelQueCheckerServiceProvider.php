@@ -3,6 +3,10 @@
 namespace Omnitask\LaravelQueChecker\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Omnitask\LaravelQueChecker\Console\Commands\CheckIsQueWorking;
+use Omnitask\LaravelQueChecker\Console\Commands\CheckQue;
+use Omnitask\LaravelQueChecker\Console\Commands\DeleteOldQueHeartbeats;
+
 class LaravelQueCheckerServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +35,7 @@ class LaravelQueCheckerServiceProvider extends ServiceProvider
             'laravelqchecker'
         );
 
+        $this->registerCommands();
         $this->registerPublishing();
     }
 
@@ -44,5 +49,21 @@ class LaravelQueCheckerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/laravelqchecker.php' => base_path('config/laravelqchecker.php'),
         ], 'config');
+    }
+    
+    /**
+     * Register the package's commands.
+     *
+     * @return void
+     */
+
+    private function registerCommands(){
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CheckIsQueWorking::class,
+                CheckQue::class,
+                DeleteOldQueHeartbeats::class,
+            ]);
+        }
     }
 }

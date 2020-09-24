@@ -50,8 +50,8 @@ class QueStatusNotification extends Notification
     public function toSlack($notifiable)
     {
         $message = $this->isWorking
-                            ? 'Que started working on ' . config('app.name')
-                            : 'Que stopped working on ' . config('app.name');
+                            ? 'Que started working on ' . config('app.url')
+                            : 'Que stopped working on ' . config('app.url');
         
         return (new SlackMessage)
                 ->from('Omnitask - Laravel Que Checker', ':ghost:')
