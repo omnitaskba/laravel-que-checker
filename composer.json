@@ -1,0 +1,30 @@
+{
+    "name": "omnitask/laravel-que-checker",
+    "description": "Package for checking if Laravel que is working and sending notifications to Slack channel",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Žarko Šarenac",
+            "email": "zarko.sarenac@gmail.com"
+        },
+        {
+            "name": "Admir Alagić",
+            "email": "admir@omnitask.ba"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Omnitask\\LaravelQueChecker\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Omnitask\\LaravelQueChecker\\Providers\\LaravelQueCheckerServiceProvider"
+            ]
+        }
+    }
+}
