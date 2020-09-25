@@ -136,7 +136,7 @@ class QueHeartbeatService
         $errors = null;
         $data = [];
         
-        $oldQueHeartBeats = QueHeartbeat::where('created_at', '<=', Carbon::now()->subDays(7))->get();
+        $oldQueHeartBeats = QueHeartbeat::where('created_at', '<=', Carbon::now()->subDays(config('laravelqchecker.que_delete_old_heartbeats_days_interval')))->get();
 
         try{
            

@@ -7,6 +7,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Omnitask\LaravelQueChecker\Console\Commands\CheckIsQueWorking;
 use Omnitask\LaravelQueChecker\Console\Commands\CheckQue;
 use Omnitask\LaravelQueChecker\Console\Commands\DeleteOldQueHeartbeats;
+use Omnitask\LaravelQueChecker\Repositories\QueCheckerRepository;
+use Log;
 
 class LaravelQueCheckerServiceProvider extends ServiceProvider
 {
@@ -75,9 +77,10 @@ class LaravelQueCheckerServiceProvider extends ServiceProvider
     private function bootSchedule(){
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
-             $schedule->command(CheckQue::class)->cron('1,6,11,16,21,26,31,36,41,46,51,56 * * * *');
-             $schedule->command(CheckIsQueWorking::class)->cron('3,8,13,18,23,28,33,38,43,48,53,58 * * * *');;
-             $schedule->command(DeleteOldQueHeartbeats::class)->dailyAt('03:00');
+           
+             $schedule->command(CheckQue::class)->cron(QueCheckerRepository::getQueCheckInterval());
+             $schedule->command(CheckIsQueWorking::class)->cron(QueCheckerRepository::getQueCheckIfWorkingInterval());;
+             $schedule->command(DeleteOldQueHeartbeats::class)->dailyAt(QueCheckerRepository::getDeleteOldQueHeartbeatsTime());
         });
     }
 }
